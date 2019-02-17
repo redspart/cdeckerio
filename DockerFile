@@ -1,26 +1,30 @@
-# GitHub:       https://github.com/gohugoio
-# Twitter:      https://twitter.com/gohugoio
-# Website:      https://gohugo.io/
+FROM alpine:3.8
+MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
-FROM golang:1.11-alpine3.7 AS build
+# Download and install hugo
+ENV HUGO_VERSION 0.54.0
+ENV HUGO_BINARY hugo_${HUGO_VERSION}_Linux-64bit.tar.gz
 
-ENV CGO_ENABLED=0
-ENV GOOS=linux
-ENV GO111MODULE=on
+RUN apk add --update \
+        ca-certificates \
+	curl \
+        git \
+	python \
+	py-pygments \
+        && rm -rf /var/cache/apk/* \
+	&& curl -sSL https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} | tar -xzC /usr/bin \
+	&& chmod +x /usr/bin/hugo
 
-WORKDIR /go/src/github.com/gohugoio/hugo
-RUN apk add --no-cache \
-    git \
-    musl-dev
-COPY . /go/src/github.com/gohugoio/hugo/
-RUN go install -ldflags '-s -w'
+# Create working directory
+RUN mkdir /usr/share/blog
+WORKDIR /usr/share/blog
 
-# ---
+# Expose default hugo port
+EXPOSE 1313
 
-FROM scratch
-COPY --from=build /go/bin/hugo /hugo
-WORKDIR /site
-VOLUME  /site
-EXPOSE  1313
-ENTRYPOINT [ "/hugo" ]
-CMD [ "--help" ]
+# Automatically build site
+ONBUILD ADD site/ /usr/share/blog
+
+# By default, serve site
+ENV HUGO_BASE_URL http://localhost:1313
+CMD hugo server -b ${HUGO_BASE_URL} --bind=0.0.0.0
