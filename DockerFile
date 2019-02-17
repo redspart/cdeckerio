@@ -1,40 +1,31 @@
-FROM alpine/git
-COPY . /data
-WORKDIR /data
-## RUN rm -rf themes/*
-## UN git clone https://github.com/nanxiaobei/hugo-paper.git themes/hugo-paper
+# Build stage
+FROM node:8 as build
 
-##
+ENV HUGO_VERSION 0.45
 
-FROM skyscrapers/hugo:0.46
-COPY --from=0 /data /data
-WORKDIR /data
-RUN hugo
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    nasm && \
+  curl -sLo hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
+  mkdir hugo && \
+  tar xzf hugo.tar.gz -C hugo/ && \
+  rm -r hugo.tar.gz && \
+  mv hugo/hugo /usr/bin/hugo && \
+  rm -r hugo/
 
-##
+# Install asset building dependencies
+COPY .npmrc themes/theme/package.json themes/theme/package-lock.json /build/themes/theme/
+RUN cd /build/themes/theme && npm i
 
-FROM mysocialobservations/docker-tdewolff-minify
-COPY --from=1 /data/public /data/public
-WORKDIR /data
-RUN minify --recursive --verbose \
-        --match=\.*.js$ \
-        --type=js \
-        --output public/ \
-        public/
+# Build site
+COPY . /build
+RUN cd /build/themes/theme && \
+  npm run production && \
+  cd /build && \
+  hugo
 
-RUN minify --recursive --verbose \
-        --match=\.*.css$ \
-        --type=css \
-        --output public/ \
-        public/
-
-RUN minify --recursive --verbose \
-        --match=\.*.html$ \
-        --type=html \
-        --output public/ \
-        public/
-
-##
-
-FROM nginx:alpine
-COPY --from=2 /data/public /usr/share/nginx/html
+# Runtime stage
+FROM nginx:mainline-alpine
+WORKDIR /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /build/public/. .
