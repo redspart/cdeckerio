@@ -20,7 +20,7 @@ RUN mkdir /usr/share/blog
 WORKDIR /usr/share/blog
 
 # Expose default hugo port
-EXPOSE 1313
+EXPOSE 80
 
 # Automatically build site
 ONBUILD ADD site/ /usr/share/blog
