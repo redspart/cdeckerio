@@ -36,3 +36,5 @@ WORKDIR /data
 
 FROM nginx:alpine
 COPY --from=2 /data/public /usr/share/nginx/html
+
+EXPOSE 80
