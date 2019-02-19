@@ -11,9 +11,9 @@ RUN hugo
 
 ##
 
-FROM mysocialobservations/docker-tdewolff-minify
-COPY --from=1 /data/public /data/public
-WORKDIR /data
+# FROM mysocialobservations/docker-tdewolff-minify
+# COPY --from=1 /data/public /data/public
+# WORKDIR /data
 # RUN minify --recursive --verbose \
 #         --match=\.*.js$ \
 #         --type=js \
@@ -35,6 +35,7 @@ WORKDIR /data
 ##
 
 FROM nginx:alpine
-COPY --from=2 /data/public /usr/share/nginx/html
+WORKDIR /data
+COPY --from=1 /data/public /usr/share/nginx/html
 
 EXPOSE 80
