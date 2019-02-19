@@ -1,76 +1,38 @@
-FROM monachus/hugo 
+FROM alpine/git
+COPY /site /data
+WORKDIR /data
 
-# FROM debian:stretch
+##
 
-# # Install pygments (for syntax highlighting) 
-# RUN apt-get -qq update \
-# 	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends libstdc++6 python-pygments git ca-certificates asciidoc curl \
-# 	&& rm -rf /var/lib/apt/lists/*
+FROM skyscrapers/hugo:0.48
+COPY --from=0 /data /data
+WORKDIR /data
+RUN hugo
 
-# # Configuration variables
-# ENV HUGO_VERSION 0.54.0
-# ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
-# ENV SITE_DIR '/usr/share/blog'
+##
 
-# # Download and install hugo
-# RUN curl -sL -o /tmp/hugo.deb \
-#     https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} && \
-#     dpkg -i /tmp/hugo.deb && \
-#     rm /tmp/hugo.deb && \
-#     mkdir ${SITE_DIR}
+FROM mysocialobservations/docker-tdewolff-minify
+COPY --from=1 /data/public /data/public
+WORKDIR /data
+# RUN minify --recursive --verbose \
+#         --match=\.*.js$ \
+#         --type=js \
+#         --output public/ \
+#         public/
 
-# WORKDIR ${SITE_DIR}
+# RUN minify --recursive --verbose \
+#         --match=\.*.css$ \
+#         --type=css \
+#         --output public/ \
+#         public/
 
-# # Expose default hugo port
-# EXPOSE 1313
+# RUN minify --recursive --verbose \
+#         --match=\.*.html$ \
+#         --type=html \
+#         --output public/ \
+#         public/
 
-# # Automatically build site
-# ONBUILD ADD frontend-static/ ${SITE_DIR}
-# ONBUILD RUN hugo -d /usr/share/nginx/html/
+##
 
-# # By default, serve site
-# ENV HUGO_BASE_URL http://localhost:1313
-# CMD hugo server -b ${HUGO_BASE_URL} --bind=0.0.0.0
-
-
-# # FROM alpine/git
-# # COPY frontend-static/ site/
-# # WORKDIR site/
-# # RUN ls
-# # WORKDIR ..
-# # RUN ls
-
-# # # FROM debian:stretch
-
-# # # # Install pygments (for syntax highlighting) 
-# # # RUN apt-get -qq update \
-# # # 	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends libstdc++6 python-pygments git ca-certificates asciidoc curl \
-# # # 	&& rm -rf /var/lib/apt/lists/*
-
-# # # # Configuration variables
-# # # ENV HUGO_VERSION 0.54.0
-# # # ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
-
-# # # # Download and install hugo
-# # # RUN curl -sL -o /tmp/hugo.deb \
-# # #     https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} && \
-# # #     dpkg -i /tmp/hugo.deb && \
-# # #     rm /tmp/hugo.deb
-
-
-
-# # # RUN hugo
-# # # FROM alpine/git
-# # # COPY frontend-static/ site/
-# # # RUN ls
-# # # RUN hugo
-
-# # # Automatically build site
-# # # ONBUILD ADD site/ ${SITE_DIR}
-# # # ONBUILD RUN hugo -d /usr/share/nginx/html/
-
-# # # ADD nginx/ /etc/nginx/
-# # # # FROM nginx:alpine
-# # # # COPY --from=1 site/site/public/ /usr/share/nginx/html
-# # # # FROM nginx:alpine
-# # # # COPY /data/public /usr/share/nginx/html/
+FROM nginx:alpine
+COPY --from=2 /data/public /usr/share/nginx/html
