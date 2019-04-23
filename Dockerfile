@@ -43,5 +43,8 @@ ONBUILD RUN hugo -d /usr/share/nginx/html/
 # CMD hugo server -b ${HUGO_BASE_URL} --bind=0.0.0.0
 
 FROM nginx:alpine
-COPY --from=1 /data/public /usr/share/nginx/html
+COPY /usr/share/nginx/html /usr/share/nginx/html
 EXPOSE 80
+# FROM nginx:alpine
+# COPY --from=1 /data/public /usr/share/nginx/html
+# EXPOSE 80
