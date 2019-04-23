@@ -30,9 +30,6 @@ RUN curl -sL -o /tmp/hugo.deb \
 
 WORKDIR ${SITE_DIR}
 
-# Expose default hugo port
-EXPOSE 1313
-
 # Automatically build site
 ONBUILD ADD site/ ${SITE_DIR}
 ONBUILD RUN hugo --minify
@@ -43,6 +40,7 @@ ONBUILD RUN hugo -d /usr/share/nginx/html/
 # CMD hugo server -b ${HUGO_BASE_URL} --bind=0.0.0.0
 
 FROM nginx:alpine
+WORKDIR ${SITE_DIR}
 COPY /usr/share/nginx/html /usr/share/nginx/html
 EXPOSE 80
 # FROM nginx:alpine
