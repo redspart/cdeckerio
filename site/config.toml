@@ -17,7 +17,7 @@ preserveTaxonomyNames = true
   noreferrerLinks = true
 
 [Permalinks]
- posts = "/:year/:filename/"
+# posts = "/:year/:filename/"
 
 [menu]
 # Add blog
@@ -29,7 +29,7 @@ preserveTaxonomyNames = true
     avatar = "/images/me/avatar.jpg"                                                   # Author's avatar
     subtitle = "Full Stack Developer. Data Enthusiast. ML/AI Explorer"                  # Subtitle
     cdn_url = ""                                                                        # Base CDN URL
-    home_mode = "" # post or other
+   # home_mode = "" # post or other
     resume= "/resume/resume-decker.pdf"                                                 # Author's Resume
 
 
