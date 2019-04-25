@@ -5,8 +5,20 @@
     <description>Recent content in cdecker.io on cdecker.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Feb 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Coffee</title>
+      <link>http://cdecker.io/coffee/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://cdecker.io/coffee/</guid>
+      <description>&lt;p&gt;&lt;center style=&#34;font-size: 2em;&#34;&gt;
+&lt;strong&gt;Work in progress&lt;/strong&gt;
+&lt;/center&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Projects</title>

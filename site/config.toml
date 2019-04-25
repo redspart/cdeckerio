@@ -17,17 +17,20 @@ preserveTaxonomyNames = true
   noreferrerLinks = true
 
 [Permalinks]
-# posts = "/:year/:filename/"
+ # posts = "/:year/:filename/"
 
 [menu]
 # Add blog
+#[[menu.main]]
+#    name = "Coffee"
+#    url = "/coffee/"
 
 
 [params]
     since = 2017
     author = "Christian Decker"                                                         # Author's name
     avatar = "/images/me/avatar.jpg"                                                   # Author's avatar
-    subtitle = "Full Stack Developer. Data Enthusiast. ML/AI Explorer"                  # Subtitle
+    subtitle = "Full Stack Developer. Data Enthusiast. ML/AI Explorer. Coffee Lover"                  # Subtitle
     cdn_url = ""                                                                        # Base CDN URL
    # home_mode = "" # post or other
     resume= "/resume/resume-decker.pdf"                                                 # Author's Resume
@@ -39,9 +42,9 @@ preserveTaxonomyNames = true
     keywords = "" # site keywords
 
     # Chinese marketing
-    beian = ""
-    baiduAnalytics = ""
-    license= '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
+    # beian = ""
+    # baiduAnalytics = ""
+    # license= '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
 
 [params.social]
     GitHub = "redspart"
