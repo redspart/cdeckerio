@@ -6,6 +6,7 @@ WORKDIR /data
 FROM monachus/hugo
 COPY --from=0 /data /data
 WORKDIR /data
+RUN hugo
 # RUN hugo --minify
 
 # FROM debian:stretch
