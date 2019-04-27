@@ -13,8 +13,8 @@ The theme has been modified:
 ### TODO (no specific order):
 
 - [x] ~~Get website deployed~~ -> Deployed on [cdecker.io](https://cdecker.io)
-- [] Add an about-me page
-- [] Move from Dockerfile to docker-compose
-- [] Create a service to pull current public projects for the "projects" page
-- [] Add interactive timeline of my professional history
-- [] Start a coffee blog
+- [ ] Add an about-me page
+- [ ] Move from Dockerfile to docker-compose
+- [ ] Create a service to pull current public projects for the "projects" page
+- [ ] Add interactive timeline of my professional history
+- [ ] Start a coffee blog
