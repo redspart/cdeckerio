@@ -10,7 +10,7 @@ The theme has been modified:
     2. Changed the JS to be a constaint dark theme
     3. Removed some branding
 
-### TODO (no specific order):
+###### TODO (no specific order):
 
 - [x] ~~Get website deployed~~ -> Deployed on [cdecker.io](https://cdecker.io)
 - [ ] Add an about-me page
