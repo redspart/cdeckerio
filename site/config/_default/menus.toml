@@ -1,21 +1,5 @@
-[[main]]
-  name = "Projects"
-  url = "project/"
-  weight = 20
-
-[[main]]
-  name = "Coffee"
-  url = "coffee/"
-  weight = 40
-
-# [[main]]
-#   name = "Talks"
-#   url = "talk/"
-#   weight = 50
-
 # Link to a PDF of your resume/CV from the menu.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 [[main]]
    name = "Resume"
    url = "resume/resume-decker.pdf"
-   weight = 70

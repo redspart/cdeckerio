@@ -1,9 +1,12 @@
 # cdeckerio
 
-# Development steps
+# Development steps X64
 1. Open in container
 2. `cd site/ && hugo`
 3. `hugo run -D`
+
+# Development steps M1
+1. `brew install hugo`
 
 ###### Personal website
 
