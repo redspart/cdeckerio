@@ -18,10 +18,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 ENV HUGO_VERSION 0.85.0
-#ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
-#hugo_0.85.0_Linux-ARM64.deb
-ENV HUGO_BINARY hugo_${HUGO_VERSION}_Linux-ARM64.deb
-#ENV HUGO_BINARY hu
+ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
 
 # Configure apt and install packages
 RUN apt-get update \
