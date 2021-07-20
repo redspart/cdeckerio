@@ -60,8 +60,8 @@ theme = "LoveIt"
     [params.home.profile]
       enable = true
       avatarURL = "/images/avatar.jpeg"
-      title = "Sr. Infrastructure Engineer"
-      subtitle = "This is My New Hugo Site"
+      title = "Sr. Data Infrastructure Engineer"
+      subtitle = "Exploring the world"
       typeit = false 
       social = true
       disclaimer = ""
