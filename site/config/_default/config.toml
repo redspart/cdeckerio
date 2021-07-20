@@ -1,4 +1,4 @@
-baseURL = "cdecker.io"
+baseURL = "https://cdecker.io"
 defaultContentLanguage = "en"
 languageCode = "en"
 title = "cdeckerio"

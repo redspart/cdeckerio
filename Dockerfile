@@ -7,7 +7,8 @@ FROM monachus/hugo
 COPY --from=0 /data /data
 WORKDIR /data
 RUN hugo
+RUN ls /data/themes/LoveIt
 
 ##
 FROM nginx:alpine
-COPY --from=1 /usr/share/nginx/html /usr/share/nginx/html
+COPY --from=1 /data/public /usr/share/nginx/html
