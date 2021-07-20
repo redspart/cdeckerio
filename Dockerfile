@@ -1,5 +1,4 @@
 FROM alpine/git
-RUN git submodule update --init --recursive
 COPY /site /data
 WORKDIR /data
 
