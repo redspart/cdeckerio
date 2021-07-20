@@ -1,6 +1,7 @@
 FROM alpine/git
 COPY /site /data
 WORKDIR /data
+RUN git submodule update --init --recursive
 
 ##
 FROM monachus/hugo

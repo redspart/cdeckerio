@@ -1,71 +1,102 @@
-# Configuration of Academic
-# Documentation: https://sourcethemes.com/academic/
-#
-# This file is formatted using TOML syntax - learn more at https://learnxinyminutes.com/docs/toml/
-# Each configuration section is defined by a name in square brackets (e.g. `[outputs]`).
-
-# Title of your site
+baseURL = "cdecker.io"
+defaultContentLanguage = "en"
+languageCode = "en"
 title = "cdeckerio"
 
-# The URL of your site.
-# End your URL with a `/` trailing slash, e.g. `https://example.com/`.
-baseurl = "https://cdecker.io/"
+# Change the default theme to be use when building the site with Hugo
+theme = "LoveIt"
 
-# Enter a copyright notice to display in the site footer.
-# To display a copyright symbol, type `&copy;`. For current year, type `{year}`.
-copyright = ""
+[params]
+  #  LoveIt theme version
+  version = "0.2.X"
+  defaultTheme = "dark"
+  keywords = ["hugo", "consulting", "backend"]
+  gitRepo = "https://github.com/redspart"
+  fingerprint = "sha512"
+  dateFormat = "2020-01-02"
 
-# Enable analytics by entering your Google Analytics tracking ID
-googleAnalytics = ""
+  [params.search]
+    enable = true
+    type = "lunr"
+    contentLength = 4000
+    placeholder = ""
+    maxResultLength = 10
+    snippetLength = 30
+    highlightTag = "em"
+    absoluteURL = false
 
-############################
-## Advanced options below ##
-############################
+  [params.header]
+    desktopMode = "fixed"
+    mobileMode = "auto"
+    [params.header.title]
+      logo = ""
+      name = "Christian Decker"
+      typeit = false
 
-# Name of Academic theme folder in `themes/`.
-theme = "academic"
+  [params.footer]
+    enabled = false
+    custom = ''
+    hugo = true
+    copyright = true
+    author = true
+    since = 2019
+    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
 
-# Get last modified date for content from Git?
-enableGitInfo = false
+  [params.section]
+    # special amount of posts in each section page
+    paginate = 20
+    # date format (month and day)
+    dateFormat = "01-02"
+    # amount of RSS pages
+    rss = 10
 
-# Default language to use (if you setup multilingual support)
-defaultContentLanguage = "en"
-hasCJKLanguage = false  # Set `true` for Chinese/Japanese/Korean languages.
-defaultContentLanguageInSubdir = false
-removePathAccents = true  # Workaround for https://github.com/gohugoio/hugo/issues/5687
+  [params.social]
+    Github = "redspart"
+    Linkedin = "christian-decker-01a25280"
+    Email = "christian@cdecker.io"
+    RSS = false
 
-paginate = 10  # Number of items per page in paginated lists.
-enableEmoji = true
-footnotereturnlinkcontents = "<sup>^</sup>"
-ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+  [params.home]
+    [params.home.profile]
+      enable = true
+      avatarURL = "/images/avatar.jpeg"
+      title = "Sr. Data Infrastructure Engineer"
+      subtitle = "Exploring the world"
+      typeit = false 
+      social = true
+      disclaimer = ""
+    [params.home.posts]
+      enable = true
+      paginate = 6
+      # default behavior when you don't set "hiddenFromHomePage" in front matter
+      defaultHiddenFromHomePage = false
+  [params.page]
+    hiddenFromHomePage = false
+    hiddenFromSearch = false
+    fontawesome = true
+    ruby = true
+    python = true
+    linkToMarkdown = true
+    [params.page.toc]
+      enable = true
+      keepStatic = true
+      auto = true
+    [params.page.code]
+      copy = true
+      maxShownLines = 10
+    [params.page.share]
+      enable = true
+      Twitter = true
+      Linkedin = true
+      HackerNews = true
+      Reddit = true
+    [params.page.comment]
+      enable = false 
 
-[outputs]
-  home = [ "HTML", "RSS", "JSON", "WebAppManifest" ]
-  section = [ "HTML", "RSS" ]
 
-[mediaTypes."application/manifest+json"]
-  suffixes = ["webmanifest"]
-
-[outputFormats.WebAppManifest]
-  mediaType = "application/manifest+json"
-  rel = "manifest"
-
-# Configure BlackFriday Markdown rendering.
-#   See: https://gohugo.io/getting-started/configuration/#configure-blackfriday
-[blackfriday]
-  hrefTargetBlank = true  # `true` opens external links in a new tab. See https://github.com/gohugoio/hugo/issues/2424
-	angledQuotes = false
-	latexDashes = true
-  extensions = ["backslashLineBreak"]
-
-[imaging]
-  resampleFilter = "lanczos"
-  quality = 90
-  anchor = "smart"  # Anchor for cropping. Options include Smart and Center.
-
-# Taxonomies.
-[taxonomies]
-  tag = "tags"
-  category = "categories"
-  publication_type = "publication_types"
-  author = "authors"
+# Markup related configuration in Hugo
+[markup]
+  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
